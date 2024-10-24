@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylo.css">
+
+</head>
+<body>
+    <div class="title-container">
+        <h1 class="title">Bienvenidos a Huellitas Store</h1>
+    </div>
+    <div class="container" id="bubbleContainer"></div>
+
+    <script>
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            
+            // Tamaño aleatorio entre 20px y 100px
+            const size = Math.random() * 80 + 20;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // Posición aleatoria horizontal
+            const x = Math.random() * (window.innerWidth - size);
+            bubble.style.left = `${x}px`;
+            
+            // Colores pastel con gradiente
+            const colors = [
+                'rgba(173, 216, 230, 0.7)', // Azul claro
+                'rgba(221, 160, 221, 0.7)', // Violeta
+                'rgba(144, 238, 144, 0.7)', // Verde claro
+                'rgba(255, 182, 193, 0.7)', // Rosa
+                'rgba(255, 218, 185, 0.7)'  // Melocotón
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            bubble.style.background = `radial-gradient(circle at 30% 30%, 
+                ${color.replace('0.7', '0.9')},
+                ${color.replace('0.7', '0.4')})`;
+            
+            // Retraso aleatorio para la animación
+            bubble.style.animationDelay = `${Math.random() * 2}s`;
+            
+            // Agregar flotación después de que suba
+            setTimeout(() => {
+                bubble.classList.add('floating');
+            }, 2000);
+            
+            // Evento de clic para hacer "pop"
+            bubble.addEventListener('click', () => {
+                bubble.style.transform = 'scale(1.5)';
+                bubble.style.opacity = '0';
+                setTimeout(() => bubble.remove(), 300);
+                createBubble(); // Crear una nueva burbuja
+            });
+            
+            document.getElementById('bubbleContainer').appendChild(bubble);
+        }
+
+        // Esperar un momento antes de crear las burbujas iniciales
+        setTimeout(() => {
+            // Crear burbujas iniciales de forma escalonada
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createBubble(), i * 100);
+            }
+            
+            // Agregar más burbujas periódicamente
+            setInterval(createBubble, 3000);
+        }, 500);
+    </script>
+</body>
+</html>

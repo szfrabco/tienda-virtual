@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(45deg, #1a1a2e, #16213e);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    cursor: pointer;
+    transform: translateY(100vh);
+    animation: riseUp 2s ease-out forwards;
+}
+
+@keyframes riseUp {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.bubble:hover {
+    transform: scale(1.2);
+}
+
+.title-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.title {
+    font-family: Arial, sans-serif;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0;
+    opacity: 0; /* Si quieres que empiece invisible y luego aparezca, mantén esto */
+    transform: translateY(50vh);
+    animation: titleRise 1.5s ease-out forwards;
+    
+    background: linear-gradient(45deg, #ffffff, #88ddff); /* Fondo degradado */
+    -webkit-background-clip: text; /* Hace que el fondo se recorte al texto */
+    -webkit-text-fill-color: transparent; /* El texto es transparente, mostrando el fondo */
+    
+    /* Elimina el color blanco porque ya estás usando el degradado */
+    padding: 10px 20px;
+    color: transparent; /* Asegúrate de que sea transparente en todos los navegadores */
+}
+
+@keyframes titleRise {
+    0% {
+        opacity: 0;
+        transform: translateY(50vh);
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+    50% {
+        transform: translateY(-20px) translateX(10px);
+    }
+    100% {
+        transform: translateY(0px) translateX(0px);
+    }
+}
+  
